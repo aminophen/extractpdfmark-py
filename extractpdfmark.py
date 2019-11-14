@@ -30,6 +30,7 @@ for nd in dests:
   title = nd.title
   page = pagedict[nd.page.getObject().get("/Contents")]
   typ = nd.typ
+  # [TODO] these values can sometimes have `None'?
   left = bottom = right = top = zoom = ''
   if typ == "/XYZ" or typ == "/FitV" or typ == "/FitR" or typ == "/FitBV":
     left = nd.left
