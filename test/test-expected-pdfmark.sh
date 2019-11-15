@@ -39,7 +39,7 @@ case "$OPTSUFFIX" in
 	;;
 esac
 
-${top_builddir}/src/extractpdfmark ${OPTION} ${PDF} | \
+extractpdfmark ${OPTION} ${PDF} | \
     ${GREP} -v "^%\|^$" > ${EXTRACTEDPDFMARK}
 
 if test x"$DIFF" = x; then
