@@ -5,6 +5,7 @@ DIFF = diff
 GREP = grep
 srcdir = .
 top_builddir = .
+extractpdfmark = ../extractpdfmark.py
 #################
 
 TESTS = $(TESTMARKS) $(TESTROUNDS)
@@ -16,6 +17,7 @@ PS_LOG_COMPILER = $(srcdir)/test-round.sh
 
 TESTS_ENVIRONMENT = top_builddir=$(top_builddir) \
 	srcdir=$(srcdir) \
+	extractpdfmark=$(extractpdfmark) \
 	GREP=$(GREP) \
 	DIFF=$(DIFF) \
 	GHOSTSCRIPT=$(GHOSTSCRIPT)
@@ -95,54 +97,54 @@ namedict.pdf: nodest.pdf addnamedict.ps
 # Generate expected PDFmark
 # Tarball should contain them for checking outputs.
 %-expected.pdfmark: %.pdf
-	extractpdfmark $< | \
+	$(extractpdfmark) $< | \
 		$(GREP) -v "^%\|^$$" > $@
 
 # Generate expected PDFmark with hexadecimal style
 # Tarball should contain them for checking outputs.
 %-expected-hex.pdfmark: %.pdf
-	extractpdfmark --style=hex $< | \
+	$(extractpdfmark) --style=hex $< | \
 		$(GREP) -v "^%\|^$$" > $@
 
 # Generate expected PDFmark with literal style full escaped
 # Tarball should contain them for checking outputs.
 %-expected-literal-escape.pdfmark: %.pdf
-	extractpdfmark --style=literal --escape $< | \
+	$(extractpdfmark) --style=literal --escape $< | \
 		$(GREP) -v "^%\|^$$" > $@
 
 # Generate expected PDFmark with name style
 # Tarball should contain them for checking outputs.
 %-expected-name.pdfmark: %.pdf
-	extractpdfmark --style=name $< | \
+	$(extractpdfmark) --style=name $< | \
 		$(GREP) -v "^%\|^$$" > $@
 
 # Generate expected PDFmark with name style full escaped
 # Tarball should contain them for checking outputs.
 %-expected-name-escape.pdfmark: %.pdf
-	extractpdfmark --style=name --escape $< | \
+	$(extractpdfmark) --style=name --escape $< | \
 		$(GREP) -v "^%\|^$$" > $@
 
 # Generate extracted PDFmark
 # Tarball should not contain them for checking building environment.
 %-round.ps: %.pdf
-	extractpdfmark -o $@ $<
+	$(extractpdfmark) -o $@ $<
 
 # Generate extracted PDFmark with hexadecimal style
 # Tarball should not contain them for checking building environment.
 %-round-hex.ps: %.pdf
-	extractpdfmark --style=hex -o $@ $<
+	$(extractpdfmark) --style=hex -o $@ $<
 
 # Generate extracted PDFmark with literal style full escaped
 # Tarball should not contain them for checking building environment.
 %-round-literal-escape.ps: %.pdf
-	extractpdfmark --style=literal --escape  -o $@ $<
+	$(extractpdfmark) --style=literal --escape  -o $@ $<
 
 # Generate extracted PDFmark with name style
 # Tarball should not contain them for checking building environment.
 %-round-name.ps: %.pdf
-	extractpdfmark --style=name -o $@ $<
+	$(extractpdfmark) --style=name -o $@ $<
 
 # Generate extracted PDFmark with name style full escaped
 # Tarball should not contain them for checking building environment.
 %-round-name-escape.ps: %.pdf
-	extractpdfmark --style=name --escape  -o $@ $<
+	$(extractpdfmark) --style=name --escape  -o $@ $<

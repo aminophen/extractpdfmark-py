@@ -44,7 +44,7 @@ fi
 
 ${GHOSTSCRIPT} -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=${PDF2} \
     ${PDF} ${EXTRACTEDPDFMARK}
-extractpdfmark ${OPTION} -o ${EXTRACTEDPDFMARK2} ${PDF2}
+${extractpdfmark} ${OPTION} -o ${EXTRACTEDPDFMARK2} ${PDF2}
 
 if test x"$DIFF" = x; then
     # skip
