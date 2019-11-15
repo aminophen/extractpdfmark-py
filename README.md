@@ -4,6 +4,8 @@ Extract PDFmark
 (= extract page mode and named destinations as PDFmark from PDF)
 written in Python.
 
+**Note: currently NOT working for almost all test cases.**
+
 ## License
 
 The script is licensed under GPLv3 or later.
