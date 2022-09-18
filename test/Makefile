@@ -3,9 +3,10 @@ PDFTEX = pdftex
 GHOSTSCRIPT = rungs
 DIFF = diff
 GREP = grep
+SED = gsed
 srcdir = .
 top_builddir = .
-extractpdfmark = ../extractpdfmark.py
+extractpdfmark = extractpdfmark
 #################
 
 TESTS = $(TESTMARKS) $(TESTROUNDS)
@@ -20,6 +21,7 @@ TESTS_ENVIRONMENT = top_builddir=$(top_builddir) \
 	extractpdfmark=$(extractpdfmark) \
 	GREP=$(GREP) \
 	DIFF=$(DIFF) \
+	SED=$(SED) \
 	GHOSTSCRIPT=$(GHOSTSCRIPT)
 
 # Source files for test PDFs

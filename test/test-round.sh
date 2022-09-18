@@ -1,8 +1,8 @@
 #!/bin/sh
 
 EXTRACTEDPDFMARK=$1
-BASENAME=`basename ${EXTRACTEDPDFMARK} | sed -e "s/-round\(-.\+\)\?\.ps$//"`
-OPTSUFFIX=`echo ${EXTRACTEDPDFMARK} | sed -e "s/^\(.*-round\)\(-.\+\)\?\.ps$/\2/"`
+BASENAME=`basename ${EXTRACTEDPDFMARK} | ${SED} -e "s/-round\(-.\+\)\?\.ps$//"`
+OPTSUFFIX=`echo ${EXTRACTEDPDFMARK} | ${SED} -e "s/^\(.*-round\)\(-.\+\)\?\.ps$/\2/"`
 
 PDF="${BASENAME}.pdf"
 PDF2="${BASENAME}-round${OPTSUFFIX}-test.pdf"

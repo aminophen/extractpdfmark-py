@@ -1,8 +1,8 @@
 #!/bin/sh
 
 EXPECTEDPDFMARK=$1
-BASENAME=`basename ${EXPECTEDPDFMARK} | sed -e "s/-expected\(-.\+\)\?\.pdfmark$//"`
-OPTSUFFIX=`echo ${EXPECTEDPDFMARK} | sed -e "s/^\(.*-expected\)\(-.\+\)\?\.pdfmark$/\2/"`
+BASENAME=`basename ${EXPECTEDPDFMARK} | ${SED} -e "s/-expected\(-.\+\)\?\.pdfmark$//"`
+OPTSUFFIX=`echo ${EXPECTEDPDFMARK} | ${SED} -e "s/^\(.*-expected\)\(-.\+\)\?\.pdfmark$/\2/"`
 
 PDF="${BASENAME}.pdf"
 EXTRACTEDPDFMARK="${BASENAME}-expected${OPTSUFFIX}-test.pdfmark"
