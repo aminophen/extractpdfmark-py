@@ -59,25 +59,17 @@ EXTRA_DIST = test-round.sh test-expected-pdfmark.sh addnamedict.ps \
 	$(TESTTEXS) $(TESTPDFS) $(TESTMARKS)
 
 # For `make clean'
-CLEANFILES = $(TESTMARKS:-expected.pdfmark=-expected-test.pdfmark) \
-	$(TESTMARKS:-expected-literal-escape.pdfmark=-expected-literal-escape-test.pdfmark) \
-	$(TESTMARKS:-expected-hex.pdfmark=-expected-hex-test.pdfmark) \
-	$(TESTMARKS:-expected-name.pdfmark=-expected-name-test.pdfmark) \
-	$(TESTMARKS:-expected-name-escape.pdfmark=-expected-name-escape-test.pdfmark) \
-	$(TESTROUNDS:-round.ps=-round-test.pdf) \
-	$(TESTROUNDS:-round.ps=-round-test.ps) \
-	$(TESTROUNDS:-round-literal-escape.ps=-round-literal-escape-test.pdf) \
-	$(TESTROUNDS:-round-literal-escape.ps=-round-literal-escape-test.ps) \
-	$(TESTROUNDS:-round-hex.ps=-round-hex-test.pdf) \
-	$(TESTROUNDS:-round-hex.ps=-round-hex-test.ps) \
-	$(TESTROUNDS:-round-name.ps=-round-name-test.pdf) \
-	$(TESTROUNDS:-round-name.ps=-round-name-test.ps) \
-	$(TESTROUNDS:-round-name-escape.ps=-round-name-escape-test.pdf) \
-	$(TESTROUNDS:-round-name-escape.ps=-round-name-escape-test.ps)
+CLEANFILES = \
+	$(TESTMARKS:.pdfmark=-test.pdfmark) \
+	$(TESTROUNDS:.ps=-test.pdf) \
+	$(TESTROUNDS:.ps=-test.ps)
 
 ##### LOCAL #####
-.PHONY: test
-test: $(CLEANFILES)
+.PHONY: test clean
+test: $(TESTMARKS:.pdfmark=-test.pdfmark) $(TESTROUNDS:.ps=-test.pdf) $(TESTROUNDS:.ps=-test.ps)
+clean:
+	rm -f $(CLEANFILES)
+
 %-test.pdfmark: %.pdfmark
 	$(TESTS_ENVIRONMENT) $(PDFMARK_LOG_COMPILER) $< $@
 %-test.pdf: %.ps
