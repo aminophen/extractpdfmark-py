@@ -6,7 +6,7 @@ GREP = grep
 SED = gsed
 srcdir = .
 top_builddir = .
-extractpdfmark = extractpdfmark
+extractpdfmark = "python ../extractpdfmark.py"
 #################
 
 TESTS = $(TESTMARKS) $(TESTROUNDS)
