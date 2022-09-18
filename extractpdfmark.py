@@ -68,15 +68,21 @@ def ProcessOptions():
   version = """Version: to be written"""
 
   parser = optparse.OptionParser(usage=usage, version=version)
+  parser.add_option("-o", "--output",
+                    action="store", type="string", dest="output",
+                    metavar="OUTPUT.ps",
+                    help="Output filename [default=stdout]")
   parser.add_option("-s", "--style",
                     action="store", type="string", dest="style",
-                    metavar="STR",
-                    help="Name style (literal, hex, name)")
+                    metavar="STYLE",
+                    help="Name style (literal, hex, name) [default=%default]")
   parser.add_option("-e", "--escape",
                     action="store_true", dest="escape", default=False,
                     help="Escape all characters")
   parser.set_defaults(style='literal') # [TODO] extractpdfmark default?
   (options, args) = parser.parse_args()
+  if len(args) == 0:
+    parser.error("try with the option --help!")
   if not options.style in ['literal', 'hex', 'name']:
     parser.error("invalid style name '%s'!" % options.style)
   return (options, args)
